@@ -265,7 +265,7 @@ const plugin = function lastModifiedPlugin(schema, opts = {}) {
     }
 
     schema.pre('save', function (next) {
-        if (this.isNew) return next();
+        if (this.isNew || !this.constructor.findOne ) return next();
         this.constructor
             .findOne({ _id: this._id })
             .then(original => {
